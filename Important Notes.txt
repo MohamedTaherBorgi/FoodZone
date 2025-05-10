@@ -1,0 +1,16 @@
+fi pages client:
+
+url(' ==> url('../public/client-assets/
+href=" ==> href="../public/client-assets/
+src=" ==> src="../public/client-assets/
+
+
+fi dashboard:
+
+src="assets/ ==> src="../public/admin-assets/
+href="assets/ ==> href="../public/admin-assets/
+
+Content between header & footer
+
+content of page client inside "<div class="banner slider1 new-block"> </div>"
+content of page admin inside  "<div class="app-container"> </div>"
