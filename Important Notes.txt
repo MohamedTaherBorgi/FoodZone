@@ -1,11 +1,11 @@
-fi pages client:
+fi pages client replace all:
 
 url(' ==> url('../public/client-assets/
 href=" ==> href="../public/client-assets/
 src=" ==> src="../public/client-assets/
 
 
-fi dashboard:
+fi dashboard replace all:
 
 src="assets/ ==> src="../public/admin-assets/
 href="assets/ ==> href="../public/admin-assets/
