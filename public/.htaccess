@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /FoodZone/public/
+
+RewriteRule ^login$ login_index.php [L]
+
+RewriteRule ^register$ register_index.php [L]
+
+RewriteRule ^dashboard$ admin_index.php [L]
