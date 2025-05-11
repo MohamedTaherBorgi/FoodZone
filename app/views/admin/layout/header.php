@@ -37,9 +37,15 @@
             <header class="app-header top-bar">
                 <!-- begin navbar -->
                 <nav class="navbar navbar-expand-md">
-
                     <!-- begin navbar-header -->
                     <div class="navbar-header d-flex align-items-center">
+                        
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                    <p>Bienvenue, <?= $_SESSION['email'] ?> | <a style="color:red" href="logout_index.php">Déconnexion</a></p>
+                    <?php else: ?>
+                    <p>Not current User <a style="color:red" href="login_index.php">Connecter</a></p>
+                    <?php endif; ?>
+
                         <a href="javascript:void:(0)" class="mobile-toggle"><i class="ti ti-align-right"></i></a>
                         <a class="navbar-brand" href="index.html">
                             <img src="../public/admin-assets/img/logo-light.png" class="img-fluid logo-desktop" alt="logo" />

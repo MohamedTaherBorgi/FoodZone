@@ -1,6 +1,22 @@
 <?php
-class Login_registerController {
-    public function login() {
+class Login_registerController
+{
+    public function login()
+    {
+        if (isset($_SESSION['user_id'])) {
+            // Check the user role
+            if ($_SESSION['role'] == 'admin') {
+                header('Location: admin_index.php');  // Redirect to admin dashboard
+                exit();
+            } elseif ($_SESSION['role'] == 'client') {
+                header('Location: index.php');  // Redirect to client dashboard
+                exit();
+            } elseif ($_SESSION['role'] == 'livreur') {
+                header('Location: livreur_index.php');  // Redirect to livreur dashboard
+                exit();
+            }
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Get the email and password from the form
             $email = $_POST['email'];
@@ -18,34 +34,42 @@ class Login_registerController {
 
             // If the email does not exist
             if ($result->rowCount() == 0) {
-                // Show alert or redirect to login page with an error message
-                echo "<script>alert('L\'email n\'existe pas.');</script>";
-                return;
+                header("Location: ../app/views/login_register/email_doesnt_exist.php");
+                exit();
             }
 
             // Step 2: Verify the password
             $user = $result->fetch(PDO::FETCH_ASSOC);
             if (password_verify($password, $user['password'])) {
-                // Step 3: Set session variables or create a token for the user
-                session_start();
-                $_SESSION['user_id'] = $user['id']; // Assuming 'id' is the user's unique identifier
+                // Set session variables and redirect
+                $_SESSION['user_id'] = $user['id'];
                 $_SESSION['email'] = $user['email'];
-                $_SESSION['role'] = $user['role']; // If you want to store the user's role
+                $_SESSION['role'] = $user['role'];
 
-                // Redirect to a dashboard or home page
-                if($user['role'] == 'admin') {
+                // ✅ Set cookie if 'remember' is checked
+                if (!empty($_POST['remember'])) {
+                    setcookie('user_email', $user['email'], time() + (86400 * 30), "/"); // valid for 30 days
+                } else {
+                    // If unchecked, clear the cookie
+                    if (isset($_COOKIE['user_email'])) {
+                        setcookie('user_email', '', time() - 3600, "/");
+                    }
+                }
+
+                // Redirect based on role
+                if ($user['role'] == 'admin') {
                     header('Location: admin_index.php');
-                    exit;
-                } else if($user['role'] == 'client') {
+                    exit();
+                } else if ($user['role'] == 'client') {
                     header('Location: index.php');
-                    exit;
-                }elseif($user['role'] == 'livreur') {
+                    exit();
+                } elseif ($user['role'] == 'livreur') {
                     header('Location: livreur_index.php');
-                    exit;
+                    exit();
                 }
             } else {
-                // Password is incorrect
-                echo "<script>alert('Mot de passe incorrect.');</script>";
+                header("Location: ../app/views/login_register/password_wrong.php");
+                exit();
             }
         } else {
             // If not POST request, show the login form
@@ -54,11 +78,27 @@ class Login_registerController {
     }
 
 
-    public function register() {
+    public function register()
+    {
+        if (isset($_SESSION['user_id'])) {
+            // Check the user role
+            if ($_SESSION['role'] == 'admin') {
+                header('Location: admin_index.php');  // Redirect to admin dashboard
+                exit();
+            } elseif ($_SESSION['role'] == 'client') {
+                header('Location: index.php');  // Redirect to client dashboard
+                exit();
+            } elseif ($_SESSION['role'] == 'livreur') {
+                header('Location: livreur_index.php');  // Redirect to livreur dashboard
+                exit();
+            }
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Get form data
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
+            $telephone = $_POST['telephone'];
             $email = $_POST['email'];
             $password = $_POST['password'];
             $role = $_POST['role'];
@@ -75,17 +115,28 @@ class Login_registerController {
 
             // If the email already exists
             if ($result->rowCount() > 0) {
-              // Redirect to email_exists.php
-               header('Location: ../app/views/login_register/email_exists.php');        
-               exit;  // Ensure no further code is executed
+                // Redirect to email_exists.php
+                header('Location: ../app/views/login_register/email_exists.php');
+                exit();  // Ensure no further code is executed
+            }
+
+            // Step 1: Check if the telephone already exists
+            $query = "SELECT * FROM `user` WHERE telephone = '$telephone' LIMIT 1";  // Direct SQL query with the telephone
+            $result = $conn->query($query); // Execute the query
+
+            // If the email already exists
+            if ($result->rowCount() > 0) {
+                // Redirect to email_exists.php
+                header('Location: ../app/views/login_register/telephone_exists.php');
+                exit();  // Ensure no further code is executed
             }
 
             // Step 2: Hash the password
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
             // Step 3: Insert the new user into the database
-            $query = "INSERT INTO `user` (nom, prenom, email, password, role) 
-                      VALUES ('$nom', '$prenom', '$email', '$hashedPassword', '$role')"; // Direct SQL query
+            $query = "INSERT INTO `user` (nom, prenom, telephone, email, password, role) 
+                      VALUES ('$nom', '$prenom', '$telephone' , '$email' , '$hashedPassword', '$role')"; // Direct SQL query
             try {
                 // Execute the insert query
                 $conn->exec($query); // Using exec() for non-select queries

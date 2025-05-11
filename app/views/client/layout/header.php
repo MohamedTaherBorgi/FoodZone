@@ -1,3 +1,9 @@
+<?php if (isset($_SESSION['user_id'])): ?>
+  <p>Bienvenue, <?= $_SESSION['email'] ?> | <a style="color:red" href="logout_index.php">Déconnexion</a></p>
+<?php else: ?>
+  <p>Not current User <a style="color:red" href="login_index.php">Connecter</a></p>
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>

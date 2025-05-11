@@ -3,10 +3,10 @@
     <!-- begin app-nabar -->
     <aside class="app-navbar">
         <!-- begin sidebar-nav -->
-        <div class="sidebar-nav scrollbar scroll_dark">
+        <div class="sidebar-nav scrollbar scroll_light">
             <ul class="metismenu " id="sidebarNav">
                 <li class="nav-static-title">Personal</li>
-                <li class="active">
+                <li>
                     <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
                         <i class="nav-icon ti ti-rocket"></i>
                         <span class="nav-title">Dashboards</span>
@@ -14,7 +14,7 @@
                     </a>
                     <ul aria-expanded="false">
                         <li> <a href='index.html'>Default</a> </li>
-                        <li class="active"> <a href='index-ecommerce.html'>Ecommerce</a> </li>
+                        <li> <a href='index-ecommerce.html'>Ecommerce</a> </li>
                         <li> <a href='index-car-dealer.html'>Car Dealer</a> </li>
                         <li> <a href='index-stock-market.html'>Stock Market</a> </li>
                         <li> <a href='index-dating.html'>Dating</a> </li>
@@ -91,7 +91,7 @@
                 <li class="nav-static-title">Widgets, Tables & Layouts</li>
                 <li>
                     <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"> <i
-                            class="nav-icon ti ti-settings"></i> <span class="nav-title">Widgets</span> <span
+                            class="nav-icon ti ti-layout-grid4-alt"></i> <span class="nav-title">Widgets</span> <span
                             class="nav-label label label-success">New</span> </a>
                     <ul aria-expanded="false">
                         <li> <a href="widget-chart.html">Chart Widget</a> </li>
@@ -104,7 +104,7 @@
                 </li>
                 <li>
                     <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i
-                            class="nav-icon ti ti-layout-tab-window"></i><span class="nav-title">Tables</span></a>
+                            class="nav-icon ti ti-layout-column3-alt"></i><span class="nav-title">Tables</span></a>
                     <ul aria-expanded="false">
                         <li> <a href="tables-basic.html">Basic Table</a> </li>
                         <li> <a href="tables-color.html">Color Table </a> </li>
@@ -142,7 +142,8 @@
                         <li> <a href="form-autonumeric.html">Autonumeric</a> </li>
                         <li> <a href="form-editors.html">Editors</a> </li>
                         <li> <a href="form-elements.html">Elements</a> </li>
-                        <li> <a href="form-file-upload.html">Drop Zone</a> </li>
+                        <li> <a href="form-file-upload.html">Drop Zone
+                            </a> </li>
                         <li> <a href="form-input-groups.html">Input Groups</a> </li>
                         <li> <a href="form-inputmask.html">Input Masks</a> </li>
                         <li> <a href="form-layouts.html">Forms Layouts</a> </li>
@@ -164,12 +165,12 @@
                         <li> <a href="maps-mapael.html">Mapael Maps</a> </li>
                     </ul>
                 </li>
-                <li>
+                <li class="active">
                     <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i
                             class="nav-icon ti ti-layers"></i><span class="nav-title">Pages</span><span
                             class="nav-label label label-primary">12</span></a>
                     <ul aria-expanded="false">
-                        <li> <a href="page-account-settings.html">Account Settings</a> </li>
+                        <li class="active"> <a href="page-account-settings.html">Account Settings</a> </li>
                         <li> <a href="page-clients.html">Clients</a> </li>
                         <li> <a href="page-contacts.html">Contacts</a> </li>
                         <li> <a href="page-employees.html">Employees</a> </li>
@@ -222,86 +223,151 @@
         <!-- begin container-fluid -->
         <div class="container-fluid">
             <!-- begin row -->
-
             <div class="row">
-                <div class="col-xxl-12 m-b-30">
-                    <div class="card card-statistics h-100 mb-0">
-                        <div class="card-header d-flex align-items-center justify-content-between">
-                            <div class="card-heading">
-                                <h4 class="card-title">Top selling products</h4>
-                            </div>
-                            <div class="dropdown">
-                                <a class="btn btn-xs" href="#!">Export <i class="zmdi zmdi-download pl-1"></i> </a>
-                            </div>
+                <div class="col-md-12 m-b-30">
+                    <!-- begin page title -->
+                    <div class="d-block d-sm-flex flex-nowrap align-items-center">
+                        <div class="page-title mb-2 mb-sm-0">
+                            <h1>Account Settings</h1>
                         </div>
-                        <div class="card-body scrollbar scroll_dark pt-0" style="max-height: 450px;">
-                            <div class="datatable-wrapper table-responsive">
-                                <table id="datatable" class="table table-borderless table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Nom</th>
-                                            <th>Prenom</th>
-                                            <th>Telephone</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        // Example: Fetch users from the database
-                                        include_once '../config/Database.php';
-                                        $db = new Database();
-                                        $conn = $db->getConnection();
+                        <div class="ml-auto d-flex align-items-center">
+                            <nav>
+                                <ol class="breadcrumb p-0 m-b-0">
+                                    <li class="breadcrumb-item">
+                                        <a href="index.html"><i class="ti ti-home"></i></a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        Pages
+                                    </li>
+                                    <li class="breadcrumb-item active text-primary" aria-current="page">Account Setting
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                </div>
+            </div>
+            <!-- end row -->
+            <?php
+            include_once '../config/Database.php';
+            $db = new Database();
+            $conn = $db->getConnection();
 
-                                        $query = "SELECT * FROM `user`"; // Fetch all users
-                                        $result = $conn->query($query);
+            $id = $_GET['id'];
+            $query = "SELECT * FROM `user` WHERE id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->execute([$id]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            ?>
+            <!--mail-Compose-contant-start-->
+            <div class="row account-contant">
+                <div class="col-12">
+                    <div class="card card-statistics">
+                        <div class="card-body p-0">
+                            <div class="row no-gutters">
+                                <div class="col-xl-6 pb-xl-0 pb-5 border-right d-flex align-items-center">
+                                    <div class="page-account-profil w-100 text-center">
+                                        <div class="profile-img rounded-circle">
+                                            <div class="pt-4">
+                                                <div class="bg-img m-auto">
+                                                    <img src="../public/admin-assets/img/avtar/01.jpg" class="img-fluid"
+                                                        alt="users-avatar">
+                                                </div>
+                                                <div class="profile pt-3">
+                                                    <h4 class="mb-1"><?php echo $user['nom']; ?></h4>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        if ($result->rowCount() > 0) {
-                                            // Loop through each user and display them in the table
-                                            while ($user = $result->fetch(PDO::FETCH_ASSOC)) {
-                                                // Set badge class based on role
-                                                $badgeClass = "";
-                                                $role = $user['role'];
+                                        <div class="py-4 profile-counter">
+                                            <ul class="nav justify-content-center text-center">
+                                                <li class="nav-item border-right px-3">
+                                                    <div>
+                                                        <h4 class="mb-0">90</h4>
+                                                        <p>Post</p>
+                                                    </div>
+                                                </li>
+                                                <li class="nav-item border-right px-3">
+                                                    <div>
+                                                        <h4 class="mb-0">1.5K</h4>
+                                                        <p>Messages</p>
+                                                    </div>
+                                                </li>
+                                                <li class="nav-item px-3">
+                                                    <div>
+                                                        <h4 class="mb-0">4.4K</h4>
+                                                        <p>Members</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
 
-                                                if ($role == 'client') {
-                                                    $badgeClass = "badge badge-info-inverse";  // Client role
-                                                } elseif ($role == 'admin') {
-                                                    $badgeClass = "badge badge-danger-inverse";  // Admin role
-                                                } elseif ($role == 'livreur') {
-                                                    $badgeClass = "badge badge-warning-inverse";  // Livreur role
-                                                }
+                                        <div class="profile-btn">
+                                            <button class="btn btn-light text-primary mb-2">Upload New
+                                                Avatar</button><br>
+                                            <button class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                // Display user data in the table row
-                                                echo "
-                                                <tr>
-                                                <td>{$user['id']}</td>
-                                                <td>{$user['nom']}</td>
-                                                <td>{$user['prenom']}</td>
-                                                <td>{$user['telephone']}</td>
-                                                <td>{$user['email']}</td>
-                                                <td><span class='{$badgeClass}'>{$role}</span></td>
-                                                <td>
-                                                    <a class='mr-3' href='edit_user_index.php?id={$user['id']}'><i class='fe fe-edit'></i></a>
-                                                    <a href='../app/controllers/DeleteUserController.php?id={$user['id']}'><i class='fe fe-trash-2'></i></a>
-                                                </td>
-                                                </tr>";
-                                            }
-                                        } else {
-                                            echo "<tr><td colspan='6'>No users found</td></tr>";
-                                        }
-                                        ?>
+                                <div class="col-xl-6 col-md-6 col-12 border-t">
+                                    <div class="page-account-form">
+                                        <div class="form-titel border-bottom p-3">
+                                            <h5 class="mb-0 py-2">Modifier vos informations personnelles</h5>
+                                        </div>
+                                        <div class="p-4">
+                                            <form method="POST" action="../app/controllers/updateUserController.php">
+                                                <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
 
-                                    </tbody>
-                                </table>
+                                                <div class="form-group">
+                                                    <label for="nom">Nom</label>
+                                                    <input type="text" class="form-control" id="nom" name="nom"
+                                                        value="<?php echo $user['nom']; ?>">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="prenom">Prenom</label>
+                                                    <input type="text" class="form-control" id="prenom" name="prenom"
+                                                        value="<?php echo $user['prenom']; ?>">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="telephone">Téléphone</label>
+                                                    <input type="text" class="form-control" id="telephone"
+                                                        name="telephone" value="<?php echo $user['telephone']; ?>">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="email">E-mail</label>
+                                                    <input type="email" class="form-control" id="email" name="email"
+                                                        value="<?php echo $user['email']; ?>">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="role">Role</label>
+                                                    <select name="role" class="form-control" id="role">
+                                                        <option value="admin" <?php if ($user['role'] == 'admin')
+                                                            echo 'selected'; ?>>Admin</option>
+                                                        <option value="client" <?php if ($user['role'] == 'client')
+                                                            echo 'selected'; ?>>Client</option>
+                                                        <option value="livreur" <?php if ($user['role'] == 'livreur')
+                                                            echo 'selected'; ?>>Livreur</option>
+                                                    </select>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
-            <!-- end row -->
+            <!--mail-Compose-contant-end-->
         </div>
         <!-- end container-fluid -->
     </div>

@@ -14,3 +14,5 @@ Content between header & footer
 
 content of page client inside "<div class="banner slider1 new-block"> </div>"
 content of page admin inside  "<div class="app-container"> </div>"
+
+PHP sessions are stored on the server and tied to a session ID, which is sent to the client via a cookie. But to read or write session data (like $_SESSION['user']), you must call session_start(); on every page that wants to use session variables.

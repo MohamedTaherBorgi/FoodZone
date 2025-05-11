@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,11 @@
   <link rel="stylesheet" href="login_register-assets/style.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
   <div class="wrapper">
-    <form action="register_index.php" method="post"> <!-- Goes to the same file its already in (register_index.php) and then executes the Register() method -->
+    <form action="register_index.php" method="post">
+      <!-- Goes to the same file its already in (register_index.php) and then executes the Register() method -->
       <h2>Inscription</h2>
 
       <div class="input-field">
@@ -20,6 +23,11 @@
       <div class="input-field">
         <input type="text" name="prenom" required>
         <label>Entrez votre prénom</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" name="telephone" required>
+        <label>Entrez Téléphone</label>
       </div>
 
       <div class="input-field">
@@ -45,19 +53,20 @@
           <option value="admin">Admin</option>
           <option value="livreur">Livreur</option>
         </select>
-      </di>
+        </di>
 
-      <button type="submit">S'inscrire</button>
+        <button type="submit">S'inscrire</button>
 
-      <div class="register">
-        <p>Vous avez déjà un compte ? <a style="color: yellowgreen;" href="#"><strong>Se connecter</strong></a></p>
-      </div>
+        <div class="register">
+          <p>Vous avez déjà un compte ? <a style="color: yellowgreen;" href="login_index.php"><strong>Se
+                connecter</strong></a></p>
+        </div>
     </form>
   </div>
 
   <script>
     // Listen for form submission
-    document.querySelector('form').addEventListener('submit', function(e) {
+    document.querySelector('form').addEventListener('submit', function (e) {
       const password = document.querySelector('input[name="password"]').value;
       const confirmPassword = document.querySelector('input[name="confirm_password"]').value;
 
@@ -77,4 +86,5 @@
   </script>
 
 </body>
+
 </html>

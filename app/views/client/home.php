@@ -1,4 +1,4 @@
-      <div class="banner slider1 new-block">
+     <div class="banner slider1 new-block">
         <div
           class="fixed-bg"
           style="background: url('../public/client-assets/images/slider-bg1.jpg')"

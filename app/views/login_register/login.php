@@ -11,8 +11,16 @@
     <form action="" method="POST"> <!-- Goes to the same file its already in (login_index.php) and then executes the Login() method -->
       <h2>Connexion</h2>
       <div class="input-field">
-        <input type="email" name="email" required>
-        <label>Entrez votre email</label>
+        
+      <input type="email" name="email" value="<?php 
+          if (isset($_COOKIE['user_email'])) {
+           echo $_COOKIE['user_email'];
+          } else {
+          echo '';
+        }
+        ?>" required>
+
+      <label>Entrez votre email</label>
       </div>
       <div class="input-field">
         <input type="password" name="password" required>
@@ -27,7 +35,7 @@
       </div>
       <button type="submit">Se connecter</button>
       <div class="register">
-        <p>Vous n'avez pas encore de compte ? <a style="color: yellowgreen;" href="register.php"><strong>S'inscrire</strong></a></p>
+        <p>Vous n'avez pas encore de compte ? <a style="color: yellowgreen;" href="register_index.php"><strong>S'inscrire</strong></a></p>
       </div>
     </form>
   </div>
