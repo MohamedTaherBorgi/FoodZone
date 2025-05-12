@@ -271,11 +271,13 @@
                                         <div class="profile-img rounded-circle">
                                             <div class="pt-4">
                                                 <div class="bg-img m-auto">
-                                                    <img src="../public/admin-assets/img/avtar/01.jpg" class="img-fluid"
-                                                        alt="users-avatar">
+                                                    <img src="admin-assets/img/avatar/<?php echo $user['image']; ?>"
+                                                        class="img-fluid" alt="users-avatar">
                                                 </div>
                                                 <div class="profile pt-3">
-                                                    <h4 class="mb-1"><?php echo $user['nom']; ?></h4>
+                                                    <h4 class="mb-1">
+                                                        <?php echo $user['nom']; ?>
+                                                    </h4>
                                                 </div>
                                             </div>
                                         </div>
