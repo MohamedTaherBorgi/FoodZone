@@ -1,15 +1,16 @@
 <?php
+require_once __DIR__ . '/../../config/Database.php';
 
 class Categorie
 {
     private $db;
 
-    public function __construct($db)
+    public function __construct()
     {
-        $this->db = $db;
+        // On récupère l'instance PDO de la DB
+        $this->db = Database::getInstance();
     }
 
-    // 🔸 Créer une nouvelle catégorie
     public function create($nom)
     {
         $sql = "INSERT INTO categories (nom) VALUES (:nom)";
@@ -18,14 +19,12 @@ class Categorie
         return $stmt->execute();
     }
 
-    // 🔸 Obtenir toutes les catégories
     public function getAll()
     {
         $sql = "SELECT * FROM categories";
         return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // 🔸 Obtenir une catégorie par son ID
     public function getById($id)
     {
         $sql = "SELECT * FROM categories WHERE id = :id";
@@ -35,7 +34,6 @@ class Categorie
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // 🔸 Mettre à jour une catégorie
     public function update($id, $nom)
     {
         $sql = "UPDATE categories SET nom = :nom WHERE id = :id";
@@ -45,7 +43,6 @@ class Categorie
         return $stmt->execute();
     }
 
-    // 🔸 Supprimer une catégorie
     public function delete($id)
     {
         $sql = "DELETE FROM categories WHERE id = :id";

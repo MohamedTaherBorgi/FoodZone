@@ -127,7 +127,7 @@
                             <h3>Veggie Supreme</h3>
                             <p class="sz">Size : Regular</p>
                             <p class="ab-it">Lorem ipsum dolor sit amet..</p>
-                            <p class="price"><span>$6.00</span> <del>$8.00 40% off</del></p>
+                            <p class="price"><span>$66.00</span> <del>$8.00 40% off</del></p>
                         </div>
                         <div class="btn-sec">
                             <a href="../public/client-assets/#" class="btn4">About More</a>
@@ -144,7 +144,7 @@
                             <h3>Veggie Supreme</h3>
                             <p class="sz">Size : Regular</p>
                             <p class="ab-it">Lorem ipsum dolor sit amet..</p>
-                            <p class="price"><span>$6.00</span> <del>$8.00 40% off</del></p>
+                            <p class="price"><span>$600.00</span> <del>$8.00 40% off</del></p>
                             <div class="btn-sec">
                                 <a href="../public/client-assets/#" class="btn4">About More</a>
                                 <a href="../public/client-assets/#" class="btn4">Add to Cart</a>
@@ -162,7 +162,7 @@
                             <h3>Veggie Supreme</h3>
                             <p class="sz">Size : Regular</p>
                             <p class="ab-it">Lorem ipsum dolor sit amet..</p>
-                            <p class="price"><span>$6.00</span> <del>$8.00 40% off</del></p>
+                            <p class="price"><span>$677.00</span> <del>$8.00 40% off</del></p>
                         </div>
                         <div class="btn-sec">
                             <a href="../public/client-assets/#" class="btn4">About More</a>

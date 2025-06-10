@@ -141,7 +141,7 @@
         <div class="container">
           <p>
             <a target="_blank" href="../public/client-assets/https://www.templateshub.net"
-              >Templates Hub</a
+              ></a
             >
           </p>
           <ul class="social-nav">
