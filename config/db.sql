@@ -1,0 +1,22 @@
+CREATE DATABASE IF NOT EXISTS resto_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE resto_db;
+
+CREATE TABLE IF NOT EXISTS categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS plats (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(150) NOT NULL,
+    description TEXT,
+    prix DECIMAL(6,2) NOT NULL,
+    image VARCHAR(255),
+    categorie_id INT,
+    FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE SET NULL
+);
+CREATE TABLE IF NOT EXISTS commandes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date_commande DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL(6,2) NOT NULL
+);
