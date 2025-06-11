@@ -47,7 +47,7 @@
 
       <!-- Role Selection -->
       <div class="input-field">
-        <select name="role" required hidden>
+        <select name="role" required>
           <option value="" disabled selected>Choisissez un rôle</option>
           <option value="client" selected>Client</option>
           <option value="admin">Admin</option>
