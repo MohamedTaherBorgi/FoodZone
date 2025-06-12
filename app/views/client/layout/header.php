@@ -51,28 +51,21 @@
                 <ul class="list-unstyled">
                   <li class="drop active">
                     <a href="../public/client-assets/#">Home</a>
-                    <ul class="drop-down">
-                      <li><a href="../public/client-assets/index.html">Home1</a></li>
-                      <li><a href="../public/client-assets/home2.html">Home2</a></li>
-                    </ul>
+
                   </li>
                   <li class="drop">
                     <a href="../public/client-assets/#">Menu</a>
                     <ul class="drop-down">
                       <li><a href="../public/client-assets/menu.html">Menu</a></li>
-                      <li><a href="../public/client-assets/menu2.html">Menu2</a></li>
                     </ul>
                   </li>
                   <li class="drop">
                     <a href="../public/client-assets/#">Pages</a>
                     <ul class="drop-down">
                       <li><a href="../public/client-assets/menu.html">Menu</a></li>
-                      <li><a href="../public/client-assets/menu2.html">Menu2</a></li>
                       <li><a href="../public/client-assets/about_us.html">About</a></li>
                       <li><a href="../public/client-assets/blog.html">Blog</a></li>
-                      <li><a href="../public/client-assets/blog_left.html">Blog left</a></li>
-                      <li><a href="../public/client-assets/blog_right.html">Blog right</a></li>
-                      <li><a href="../public/client-assets/blog_single.html">Single blog</a></li>
+
                       <li><a href="../public/client-assets/contact.html">Contact us</a></li>
                       <li>
                         <a href="../public/client-assets/product_single.html">Product single</a>
@@ -80,21 +73,23 @@
                       <li><a href="../public/client-assets/shopping_cart.html">Cart page</a></li>
                     </ul>
                   </li>
-                  <li><a href="../public/client-assets/#">Meals</a></li>
-                  <li><a href="../public/client-assets/#">Pizza</a></li>
+
                   <li><a href="../public/client-assets/about_us.html">About</a></li>
                   <li class="drop">
                     <a href="../public/client-assets/#">Blog</a>
                     <ul class="drop-down">
                       <li><a href="../public/client-assets/blog.html">Blog</a></li>
-                      <li><a href="../public/client-assets/blog_left.html">Blog left</a></li>
-                      <li><a href="../public/client-assets/blog_right.html">Blog right</a></li>
-                      <li><a href="../public/client-assets/blog_single.html">Single blog</a></li>
+                      <li><a href="login_index.php">Blog left</a></li>
+                      <li><a href="login_index.php">Blog right</a></li>
+                      <li><a href="login_index.php">Single blog</a></li>
+                      <li><a href="../public/client-assets/#">Login/Signup</a></li>
+                      <p>Not current User <a style="color:red" href="login_index.php">Connecter</a></p>
+                      <li><a href="commandes_index.php">Mes Commandes</a></li>
+                      <li><a href="../public/client-assets/contact.html">Contact Us</a></li>
                     </ul>
                   </li>
-                  <li><a href="commandes_index.php">Mes Commandes</a></li>
-                  <li><a href="../public/client-assets/contact.html">Contact Us</a></li>
-                  <li><a href="../public/client-assets/#">Login/Signup</a></li>
+
+
                 </ul>
               </nav>
               <div class="nav-right-block">
