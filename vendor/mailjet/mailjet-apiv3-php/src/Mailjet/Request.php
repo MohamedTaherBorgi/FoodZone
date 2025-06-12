@@ -29,60 +29,60 @@ class Request
     /**
      * @var string
      */
-    private string $method;
+    private $method;
 
     /**
      * @var string
      */
-    private string $url;
+    private $url;
 
     /**
      * @var array
      */
-    private array $filters;
+    private $filters;
 
     /**
-     * @var array|string|null
+     * @var array
      */
     private $body;
 
     /**
      * @var array
      */
-    private array $auth;
+    private $auth;
 
     /**
      * @var string
      */
-    private string $type;
+    private $type;
 
     /**
      * @var array
      */
-    private array $requestOptions;
+    private $requestOptions = [];
 
     /**
      * @var GuzzleClient
      */
-    private GuzzleClient $guzzleClient;
+    private $guzzleClient;
 
     /**
      * Build a new Http request.
      *
-     * @param array             $auth           [apikey, apisecret]
-     * @param string            $method         http method
-     * @param string            $url            call url
-     * @param array             $filters        Mailjet resource filters
-     * @param array|string|null $body           Mailjet resource body
-     * @param string            $type           Request Content-type
-     * @param array             $requestOptions
+     * @param array  $auth           [apikey, apisecret]
+     * @param string $method         http method
+     * @param string $url            call url
+     * @param array  $filters        Mailjet resource filters
+     * @param mixed  $body           Mailjet resource body
+     * @param string $type           Request Content-type
+     * @param array  $requestOptions
      */
     public function __construct(
         array $auth,
         string $method,
         string $url,
         array $filters,
-        array|string|null $body,
+        $body,
         string $type,
         array $requestOptions = []
     ) {
@@ -113,7 +113,7 @@ class Request
     {
         $payload = [
             'query' => $this->filters,
-            (is_array($this->body) ? 'json' : 'body') => $this->body,
+            ('application/json' === $this->type ? 'json' : 'body') => $this->body,
         ];
 
         $authArgsCount = \count($this->auth);
@@ -138,7 +138,7 @@ class Request
         if ($call) {
             try {
                 $response = call_user_func([$this, strtolower($this->method)], $this->url, $payload);
-            } catch (ClientException | ServerException $e) {
+            } catch (ClientException|ServerException $e) {
                 $response = $e->getResponse();
             }
         }
@@ -179,9 +179,9 @@ class Request
     /**
      * Request body getter.
      *
-     * @return array|string|null request body
+     * @return array request body
      */
-    public function getBody(): array|string|null
+    public function getBody(): array
     {
         return $this->body;
     }

@@ -11,9 +11,6 @@ declare(strict_types=1);
 
 namespace Mailjet;
 
-use Mailjet\Model\DtoInterface;
-use Mailjet\Normalizer\NormalizerInterface;
-
 class Client
 {
     public const WRAPPER_VERSION = Config::WRAPPER_VERSION;
@@ -37,26 +34,26 @@ class Client
      */
     public const PROXY = 'proxy';
 
-    private string $apikey;
-    private ?string $apisecret;
-    private ?string $apitoken;
-    private string $version = Config::MAIN_VERSION;
-    private string $url = Config::MAIN_URL;
-    private bool $secure = Config::SECURED;
-    private bool $call = true;
-    private array $settings = [];
-    private bool $changed = false;
+    private $apikey;
+    private $apisecret;
+    private $apitoken;
+    private $version = Config::MAIN_VERSION;
+    private $url = Config::MAIN_URL;
+    private $secure = Config::SECURED;
+    private $call = true;
+    private $settings = [];
+    private $changed = false;
     /**
      * @var int[]
      */
-    private array $requestOptions = [
+    private $requestOptions = [
         self::TIMEOUT => 15,
         self::CONNECT_TIMEOUT => 2,
     ];
     /**
      * @var string[]
      */
-    private array $smsResources = [
+    private $smsResources = [
         'send',
         'sms',
         'sms-send',
@@ -64,7 +61,7 @@ class Client
     /**
      * @var string[]
      */
-    private array $dataAction = [
+    private $dataAction = [
         'csverror/text:csv',
         'csvdata/text:plain',
         'JSONError/application:json/LAST',
@@ -78,7 +75,7 @@ class Client
      * @param bool        $call     performs the call or not
      * @param array       $settings
      */
-    public function __construct(string $key, ?string $secret = null, bool $call = true, array $settings = [])
+    public function __construct(string $key, string $secret = null, bool $call = true, array $settings = [])
     {
         $this->setAuthentication($key, $secret, $call, $settings);
     }
@@ -86,19 +83,18 @@ class Client
     /**
      * Trigger a POST request.
      *
-     * @param array $resource Mailjet Resource/Action pair
-     * @param array $args Request arguments
-     * @param array $options
-     * @param string $contentType
+     * @param  array $resource Mailjet Resource/Action pair
+     * @param  array $args     Request arguments
+     * @param  array $options
      * @return Response
      */
-    public function post(array $resource, array $args = [], array $options = [], string $contentType = 'application/json'): Response
+    public function post(array $resource, array $args = [], array $options = []): Response
     {
         if (!empty($options)) {
             $this->setOptions($options, $resource);
         }
 
-        $result = $this->_call('POST', $resource[0], $resource[1], $args, $contentType);
+        $result = $this->_call('POST', $resource[0], $resource[1], $args);
 
         if (!empty($this->changed)) {
             $this->setSettings();
@@ -110,64 +106,18 @@ class Client
     /**
      * Trigger a GET request.
      *
-     * @param array $resource Mailjet Resource/Action pair
-     * @param array $args Request arguments
-     * @param array $options
-     * @param string $contentType
+     * @param  array $resource Mailjet Resource/Action pair
+     * @param  array $args     Request arguments
+     * @param  array $options
      * @return Response
      */
-    public function get(array $resource, array $args = [], array $options = [], string $contentType = 'application/json'): Response
+    public function get(array $resource, array $args = [], array $options = []): Response
     {
         if (!empty($options)) {
             $this->setOptions($options, $resource);
         }
 
-        $result = $this->_call('GET', $resource[0], $resource[1], $args, $contentType);
-
-        if (isset($resource['normalizer']) && class_exists($resource['normalizer'])) {
-            /**
-             * @var $normalizer NormalizerInterface
-             */
-            $normalizer = $resource['normalizer'];
-            if ($normalizer::shouldBeNormalized($args)) {
-                $result = $normalizer::normalizeResponse($result);
-            }
-        }
-
-        if (!empty($this->changed)) {
-            $this->setSettings();
-        }
-
-        if (isset($resource['model']) && class_exists($resource['model'])) {
-            /**
-             * @var $model DtoInterface
-             */
-            $model = $resource['model'];
-            $data = array_map(function ($item) use ($model) {
-                return $model::fromArray($item);
-            }, $result->getData());
-            $result->setData($data);
-        }
-
-        return $result;
-    }
-
-    /**
-     * Trigger a PUT request.
-     *
-     * @param array $resource Mailjet Resource/Action pair
-     * @param array $args Request arguments
-     * @param array $options
-     * @param string $contentType
-     * @return Response
-     */
-    public function put(array $resource, array $args = [], array $options = [], string $contentType = 'application/json'): Response
-    {
-        if (!empty($options)) {
-            $this->setOptions($options, $resource);
-        }
-
-        $result = $this->_call('PUT', $resource[0], $resource[1], $args, $contentType);
+        $result = $this->_call('GET', $resource[0], $resource[1], $args);
 
         if (!empty($this->changed)) {
             $this->setSettings();
@@ -177,21 +127,43 @@ class Client
     }
 
     /**
-     * Trigger a DELETE request.
+     * Trigger a POST request.
      *
-     * @param array $resource Mailjet Resource/Action pair
-     * @param array $args Request arguments
-     * @param array $options
-     * @param string $contentType
+     * @param  array $resource Mailjet Resource/Action pair
+     * @param  array $args     Request arguments
+     * @param  array $options
      * @return Response
      */
-    public function delete(array $resource, array $args = [], array $options = [], string $contentType = 'application/json'): Response
+    public function put(array $resource, array $args = [], array $options = []): Response
     {
         if (!empty($options)) {
             $this->setOptions($options, $resource);
         }
 
-        $result = $this->_call('DELETE', $resource[0], $resource[1], $args, $contentType);
+        $result = $this->_call('PUT', $resource[0], $resource[1], $args);
+
+        if (!empty($this->changed)) {
+            $this->setSettings();
+        }
+
+        return $result;
+    }
+
+    /**
+     * Trigger a GET request.
+     *
+     * @param  array $resource Mailjet Resource/Action pair
+     * @param  array $args     Request arguments
+     * @param  array $options
+     * @return Response
+     */
+    public function delete(array $resource, array $args = [], array $options = []): Response
+    {
+        if (!empty($options)) {
+            $this->setOptions($options, $resource);
+        }
+
+        $result = $this->_call('DELETE', $resource[0], $resource[1], $args);
 
         if (!empty($this->changed)) {
             $this->setSettings();
@@ -309,7 +281,6 @@ class Client
         } else {
             $this->apitoken = $key;
             $this->version = Config::SMS_VERSION;
-            $this->apikey = '';
         }
 
         $this->initSettings($call, $settings);
@@ -323,25 +294,20 @@ class Client
      * @param string $resource mailjet resource
      * @param string $action mailjet resource action
      * @param array $args Request arguments
-     * @param string $contentType Request Content-type
      * @return Response server response
      */
-    private function _call(string $method, string $resource, string $action, array $args, string $contentType = 'application/json'): Response
+    private function _call(string $method, string $resource, string $action, array $args): Response
     {
         $args = array_merge([
             'id' => '',
             'actionid' => '',
             'filters' => [],
-            'body' => null,
-            'json' => null,
+            'body' => 'GET' === $method ? null : '{}',
         ], array_change_key_case($args));
-
-        if ('GET' !== $method && null === $args['body'] && null === $args['json']) {
-            $args['body'] = "{}";
-        }
 
         $url = $this->buildURL($resource, $action, (string)$args['id'], $args['actionid']);
 
+        $contentType = 'application/json';
         if ('csvdata/text:plain' === $action) {
             $contentType = 'text/plain';
         } elseif ('csverror/text:csv' === $action) {
@@ -356,7 +322,7 @@ class Client
             $method,
             $url,
             $args['filters'],
-            $args['body'] ?? $args['json'],
+            $args['body'],
             $contentType,
             $this->requestOptions
         );
@@ -365,7 +331,6 @@ class Client
     }
 
     // phpcs:enable
-
     /**
      * Build the base API url depending on wether user need a secure connection
      * or not.
@@ -383,11 +348,11 @@ class Client
      * Checks that both parameters are strings, which means
      * that basic authentication will be required.
      *
-     * @param string|null $key
-     * @param string|null $secret
+     * @param  mixed $key
+     * @param  mixed $secret
      * @return bool flag
      */
-    private function isBasicAuthentication(?string $key, ?string $secret): bool
+    private function isBasicAuthentication($key, $secret): bool
     {
         return !empty($key) && !empty($secret);
     }
